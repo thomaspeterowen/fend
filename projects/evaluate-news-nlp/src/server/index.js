@@ -1,3 +1,10 @@
+const dotenv = require("dotenv");
+dotenv.config();
+
+console.log(`Your API key is ${process.env.API_KEY}`);
+
+const fetch = require("node-fetch");
+
 var path = require("path");
 const express = require("express");
 const mockAPIResponse = require("./mockAPI.js");
@@ -21,3 +28,48 @@ app.listen(8081, function () {
 app.get("/test", function (req, res) {
   res.send(mockAPIResponse);
 });
+
+// POST route to speak between MeaningCloud and this app
+app.post("/language", function (req, res) {
+  let data = req.body;
+
+  const requestOptions = {
+    method: "POST",
+  };
+  console.log(requestOptions);
+  const apiKey = process.env.API_KEY;
+  //const userInput = data.sentence;
+  const userInput = "I just wanted to submit a test sentence.";
+
+  const response = fetch(
+    `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&txt=${userInput}&lang=en`,
+    requestOptions
+  ).then((response) => {
+    console.log(response);
+  });
+});
+
+// API CALL CODE
+/*
+const formdata = new FormData();
+formdata.append("key", "630b070847ed36d6703cfdf5c82e5a02");
+formdata.append("txt", "YOUR TEXT HERE");
+formdata.append("lang", "en"); // 2-letter code, like en es fr ...
+
+const requestOptions = {
+  method: "POST",
+  body: formdata,
+  redirect: "follow",
+};
+
+const response = fetch(
+  "https://api.meaningcloud.com/sentiment-2.1",
+  requestOptions
+)
+  .then((response) => ({
+    status: response.status,
+    body: response.json(),
+  }))
+  .then(({ status, body }) => console.log(status, body))
+  .catch((error) => console.log("error", error));
+*/
