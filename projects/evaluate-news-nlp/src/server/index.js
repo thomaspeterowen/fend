@@ -39,10 +39,10 @@ app.post("/language", function (req, res) {
   console.log(requestOptions);
   const apiKey = process.env.API_KEY;
   //const userInput = data.sentence;
-  const userInput = "I just wanted to submit a test sentence.";
+  const userInput = "https://www.google.com/";
 
   const response = fetch(
-    `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&txt=${userInput}&lang=en`,
+    `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&url=${userInput}&lang=en`,
     requestOptions
   ).then((response) => {
     console.log(response);

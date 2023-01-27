@@ -13,6 +13,20 @@ function handleSubmit(event) {
     });
 }*/
 
+  console.log("::: Form Submitted :::");
+  fetch("/language", {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ sentence: "test sentence" }),
+  })
+    .then((res) => res.json())
+    .then(function (res) {
+      document.getElementById("results").innerHTML = res.message;
+    });
+
   const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
   const apiKey = "&appid=38621e60d3342339ccfb250e31b427a9&units=metric";
   const zip = document.getElementById("name").value + ",de";
