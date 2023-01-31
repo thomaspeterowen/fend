@@ -6,12 +6,16 @@ console.log(`Your API key is ${process.env.API_KEY}`);
 const fetch = require("node-fetch");
 
 var path = require("path");
+var bodyParser = require('body-parser');
+
 const express = require("express");
 const mockAPIResponse = require("./mockAPI.js");
 
 const app = express();
 
 app.use(express.static("dist"));
+app.use(bodyParser.json());
+
 
 console.log(__dirname);
 

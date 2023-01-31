@@ -4,7 +4,7 @@ function handleSubmit(event) {
   // check what text was put into the form field
   let url = document.getElementById("name").value;
   console.log(url);
-  Client.checkForName(url);
+  let validity = Client.checkForName(url);
 
   /*console.log("::: Form Submitted :::");
   fetch("http://localhost:8081/test")
@@ -14,10 +14,14 @@ function handleSubmit(event) {
     });
 }*/
 
-getWeatherData(url).then(function (data) {
-  console.log(data);
-  document.getElementById("results").innerHTML = data.main.temp;
-});
+if(validity){
+  getWeatherData(url).then(function (data) {
+    console.log(data);
+    document.getElementById("results").innerHTML = data;
+  });
+}else {
+  window.alert("Please enter a valid url!");
+}
 
   console.log("::: Form Submitted :::");
   /*fetch("/language", {
@@ -57,13 +61,15 @@ const getWeatherData = async (url) => {
   });
   try {
     // convert data to json format as required
-    console.log(res);
     const data = await res.json();
+    const myJSON = JSON.stringify(data);
     if (data.cod == 404) {
       // advise user if postal code is not valid
       window.alert("Please enter a valid postal code in Germany!");
     } else {
+      const myJSON = JSON.stringify(data);
       return data;
+      //return myJSON;
     }
   } catch (error) {
     console.log("error", error);

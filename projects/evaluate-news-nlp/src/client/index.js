@@ -10,10 +10,10 @@ import "./styles/footer.scss";
 import "./styles/form.scss";
 import "./styles/header.scss";
 
-console.log(checkForName);
+//console.log(checkForName);
 
 //alert("I EXIST");
-console.log("CHANGE!!");
+//console.log("CHANGE!!");
 
 // to post data to server
 const postData = async (url = "", data = {}) => {
