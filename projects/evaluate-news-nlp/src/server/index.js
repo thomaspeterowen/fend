@@ -32,7 +32,7 @@ app.get("/test", function (req, res) {
 // POST route to speak between MeaningCloud and this app
 app.post("/language", async (req, res) => {
   let data = req.body;
-  console.log(req);
+  console.log(data);
 
   const requestOptions = {
     method: "POST",
