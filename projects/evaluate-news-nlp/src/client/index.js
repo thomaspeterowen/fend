@@ -12,7 +12,7 @@ import "./styles/header.scss";
 
 console.log(checkForName);
 
-alert("I EXIST");
+//alert("I EXIST");
 console.log("CHANGE!!");
 
 // to post data to server
@@ -36,6 +36,6 @@ const postData = async (url = "", data = {}) => {
   }
 };
 
-postData("/language", { sentence: "test sentence" });
+//postData("/language", { sentence: "test sentence" });
 
 export { checkForName, handleSubmit };

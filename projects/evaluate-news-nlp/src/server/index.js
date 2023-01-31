@@ -30,8 +30,9 @@ app.get("/test", function (req, res) {
 });
 
 // POST route to speak between MeaningCloud and this app
-app.post("/language", function (req, res) {
+app.post("/language", async (req, res) => {
   let data = req.body;
+  console.log(req);
 
   const requestOptions = {
     method: "POST",
@@ -41,12 +42,24 @@ app.post("/language", function (req, res) {
   //const userInput = data.sentence;
   const userInput = "https://www.google.com/";
 
-  const response = fetch(
+  let status;
+
+  const result = await fetch(
     `https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&url=${userInput}&lang=en`,
     requestOptions
-  ).then((response) => {
-    console.log(response);
-  });
+  ).then(response => {
+    status = response.status;
+    return response.json()
+})
+.then(response => {
+  console.log(response);
+   return {
+       response: response,
+       status: status
+   }
+})
+  .then(response => res.send(response))
+  
 });
 
 // API CALL CODE
