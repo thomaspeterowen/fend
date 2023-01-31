@@ -53,7 +53,7 @@ const getWeatherData = async (url) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ sentence: url }),
+    body: JSON.stringify({"text": url})
   });
   try {
     // convert data to json format as required
