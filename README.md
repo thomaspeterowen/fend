@@ -17,17 +17,17 @@ The following project has been implemented as required to complete the Front End
 ## How To Run
 
 ### Porject Setup
-...
+```
 npm install
-...
+```
 ### Start webpack-dev-server
-...
+```
 START
-...
+```
 ### Start Express Server
-...
+```
 START
-...
+```
 ## Dependencies
 
 Dependencies are listed in the file package.json
