@@ -9,14 +9,19 @@ function handleSubmit(event) {
   let validity = Client.checkURL(url);
 
 if(validity){
-  Client.getWeatherData(url).then(function (data) {
+  Client.getWeatherData(url).then(function (data){
     console.log(data);
     // update ui elements using data from API response
-    document.getElementById("results").innerHTML = url;
-    document.getElementById("agreement").innerHTML = data.agreement;
-    document.getElementById("confidence").innerHTML = data.confidence;
-    document.getElementById("irony").innerHTML = data.irony;
-    document.getElementById("sample_sentence").innerHTML = data.sentence_list[0].text;
+    // document url
+    document.getElementById("results_div").innerHTML = url;
+    // update agreement
+    document.getElementById("agreement_div").innerHTML = data.agreement;
+    // update confidence
+    document.getElementById("confidence_div").innerHTML = data.confidence;
+    // update irony score
+    document.getElementById("irony_div").innerHTML = data.irony;
+    // update with sample sentence
+    document.getElementById("sample_sentence_div").innerHTML = data.sentence_list[0].text;
   });
 }else {
   window.alert("Please enter a valid url!");
