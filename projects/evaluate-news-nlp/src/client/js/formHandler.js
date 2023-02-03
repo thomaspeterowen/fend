@@ -1,53 +1,27 @@
 function handleSubmit(event) {
+  // preventDefault required
   event.preventDefault();
 
   // check what text was put into the form field
   let url = document.getElementById("name").value;
   console.log(url);
-  let validity = Client.checkForName(url);
-
-  /*console.log("::: Form Submitted :::");
-  fetch("http://localhost:8081/test")
-    .then((res) => res.json())
-    .then(function (res) {
-      document.getElementById("results").innerHTML = res.message;
-    });
-}*/
+  // check validity of url
+  let validity = Client.checkURL(url);
 
 if(validity){
   getWeatherData(url).then(function (data) {
     console.log(data);
-    document.getElementById("results").innerHTML = data;
+    // update ui elements using data from API response
+    document.getElementById("results").innerHTML = url;
+    document.getElementById("agreement").innerHTML = data.agreement;
+    document.getElementById("confidence").innerHTML = data.confidence;
+    document.getElementById("irony").innerHTML = data.irony;
+    document.getElementById("sample_sentence").innerHTML = data.sentence_list[0].text;
   });
 }else {
   window.alert("Please enter a valid url!");
 }
-
-  console.log("::: Form Submitted :::");
-  /*fetch("/language", {
-    method: "POST",
-    credentials: "same-origin",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ sentence: formText }),
-  })
-    .then((res) => res.json())
-.then(function (res) {
-      console.log("TOWEN TEST LOG");
-      console.log(res.message);
-      document.getElementById("results").innerHTML = "TEST TEST";
-    });*/
-
-  /*const baseURL = "https://api.openweathermap.org/data/2.5/weather?zip=";
-  const apiKey = "&appid=38621e60d3342339ccfb250e31b427a9&units=metric";
-  const zip = document.getElementById("name").value + ",de";
-
-  console.log("::: Form Submitted :::");
-  console.log(baseURL + zip + apiKey);
-  getWeatherData(baseURL, zip, apiKey).then(function (data) {
-    document.getElementById("results").innerHTML = data.main.temp;
-  });*/
+console.log("::: Form Submitted :::");
 }
 
 const getWeatherData = async (url) => {
@@ -57,19 +31,18 @@ const getWeatherData = async (url) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({"text": url})
+    body: JSON.stringify({"url": url})
   });
   try {
     // convert data to json format as required
     const data = await res.json();
-    const myJSON = JSON.stringify(data);
-    if (data.cod == 404) {
-      // advise user if postal code is not valid
-      window.alert("Please enter a valid postal code in Germany!");
-    } else {
-      const myJSON = JSON.stringify(data);
+    //console.log(data);
+    if (data.status.code == 0) {
+      // continue
       return data;
-      //return myJSON;
+    } else {
+      // advise user of API error
+      window.alert("API call returned an error, please check input!");
     }
   } catch (error) {
     console.log("error", error);

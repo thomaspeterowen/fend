@@ -16,21 +16,26 @@ The following project has been implemented as required to complete the Front End
 
 ## How To Run
 
-### Porject Setup
+### Project Setup
 ```
 npm install
 ```
 ### Start webpack-dev-server
 ```
-START
+npm run build-dev
 ```
-### Start Express Server
+### Build and Start Express Server
 ```
-START
+npm run build-prod
+
+npm run start
 ```
 ## Dependencies
 
-Dependencies are listed in the file package.json
+Dependencies are listed below and in the file package.json 
 
-
+* Babel
+* Webpack
+* Express
+* Sass
 

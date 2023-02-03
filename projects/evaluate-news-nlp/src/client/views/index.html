@@ -13,7 +13,7 @@
 
     <main>
       <section>
-        <div>This is where I will explain the website and the API used to analyse the data...</div>
+        <div>This website will analyse the sentiment of a given url using the meaningcloud sentiment APT. Please enter a fully qualified url and hit submit.</div>
       </section>
       <section>
         <form class="" onsubmit="return Client.handleSubmit(event)">
@@ -35,14 +35,22 @@
         </form>
       </section>
 
-      <section>
-        <strong>Form Results:</strong>
+      <section class="form_results">
+        <label>URL: </label>
         <div id="results"></div>
+        <label>Aggreement: </label>
+        <div id="agreement"></div>
+        <label>Confidence: </label>
+        <div id="confidence"></div>
+        <label>Irony: </label>
+        <div id="irony"></div>
+        <label>Sample Sentence: </label>
+        <div id="sample_sentence"></div>
       </section>
     </main>
 
     <footer>
-      <p>This is a footer</p>
+      <p>Website designed and created by Thomas Owen as part or the Udacity Nanodegree programme.</p>
     </footer>
     <script>
       // Check that service workers are supported
